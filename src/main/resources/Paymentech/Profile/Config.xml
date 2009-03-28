@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<!-- Implementation of Common_Ingestor -->
+	<ingestor.class>${ingestor.class}</ingestor.class>
+	<ingestor.uri.protocol>${ingestor.uri.protocol}</ingestor.uri.protocol>
+	<ingestor.uri.host>${ingestor.uri.host}</ingestor.uri.host>
+	<ingestor.uri.port>${ingestor.uri.port}</ingestor.uri.port>
+	<ingestor.uri.user>${ingestor.uri.user}</ingestor.uri.user>
+	<ingestor.uri.password>${ingestor.uri.password}</ingestor.uri.password>
+	<ingestor.uri.path>${ingestor.uri.path}</ingestor.uri.path>
+
+	<!-- CURL specific ingestor options -->
+	<ingestor.CURLOPT_CONNECTTIMEOUT>${ingestor.CURLOPT_CONNECTTIMEOUT}</ingestor.CURLOPT_CONNECTTIMEOUT>
+	<ingestor.CURLOPT_SSL_VERIFYHOST>${ingestor.CURLOPT_SSL_VERIFYHOST}</ingestor.CURLOPT_SSL_VERIFYHOST>
+	<ingestor.CURLOPT_SSL_VERIFYPEER>${ingestor.CURLOPT_SSL_VERIFYPEER}</ingestor.CURLOPT_SSL_VERIFYPEER>
+	<ingestor.CURLOPT_VERBOSE>${ingestor.CURLOPT_VERBOSE}</ingestor.CURLOPT_VERBOSE>
+
+	<!-- SFTP specific ingestor options -->
+	<ingestor.key.public.path>${ingestor.key.public.path}</ingestor.key.public.path>
+	<ingestor.key.public.fingerprint>${ingestor.key.public.fingerprint}</ingestor.key.public.fingerprint>
+	<ingestor.key.private.path>${ingestor.key.private.path}</ingestor.key.private.path>
+	<ingestor.key.private.password>${ingestor.key.private.password}</ingestor.key.private.password>
+
+	<!-- Implementation of Common_Decryptor -->
+	<decryptor.class>${decryptor.class}</decryptor.class>
+	<decryptor.uri.protocol>${decryptor.uri.protocol}</decryptor.uri.protocol>
+	<decryptor.uri.host>${decryptor.uri.host}</decryptor.uri.host>
+	<decryptor.uri.port>${decryptor.uri.port}</decryptor.uri.port>
+	<decryptor.uri.user>${decryptor.uri.user}</decryptor.uri.user>
+	<decryptor.uri.password>${decryptor.uri.password}</decryptor.uri.password>
+	<decryptor.uri.path>${decryptor.uri.path}</decryptor.uri.path>
+	<decryptor.tempdir>${decryptor.tempdir}</decryptor.tempdir>
+
+	<!-- Implementation of Common_Validator -->
+	<validator.class>${validator.class}</validator.class>
+	<validator.uri.protocol>${validator.uri.protocol}</validator.uri.protocol>
+	<validator.uri.host>${validator.uri.host}</validator.uri.host>
+	<validator.uri.port>${validator.uri.port}</validator.uri.port>
+	<validator.uri.user>${validator.uri.user}</validator.uri.user>
+	<validator.uri.password>${validator.uri.password}</validator.uri.password>
+	<validator.uri.path>${validator.uri.path}</validator.uri.path>
+
+	<!-- Publisher Uri -->
+	<publisher.uri.protocol>${publisher.uri.protocol}</publisher.uri.protocol>
+	<publisher.uri.host>${publisher.uri.host}</publisher.uri.host>
+	<publisher.uri.port>${publisher.uri.port}</publisher.uri.port>
+	<publisher.uri.user>${publisher.uri.user}</publisher.uri.user>
+	<publisher.uri.password>${publisher.uri.password}</publisher.uri.password>
+	<publisher.uri.path>${publisher.uri.path}</publisher.uri.path>
+	<publisher.debug>${publisher.debug}</publisher.debug>
+
+	<!-- Logging output Uri -->
+	<logging.uri.protocol>${logging.uri.protocol}</logging.uri.protocol>
+	<logging.uri.host>${logging.uri.host}</logging.uri.host>
+	<logging.uri.port>${logging.uri.port}</logging.uri.port>
+	<logging.uri.user>${logging.uri.user}</logging.uri.user>
+	<logging.uri.password>${logging.uri.password}</logging.uri.password>
+	<logging.uri.path>${logging.uri.path}</logging.uri.path>
+	<logging.rotated>${logging.rotated}</logging.rotated>
+	<logging.alerts.enabled>${logging.alerts.enabled}</logging.alerts.enabled>
+	<logging.alerts.recipient>${logging.alerts.recipient}</logging.alerts.recipient>
+
+	<!-- XPath Overrides of interpreted report data (see ian.zepp@gmail.com for details) -->
+	<overrides />
+</config>

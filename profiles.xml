@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<profiles>
+	<!-- Profile used for local development -->
+	<profile>
+		<id>local</id>
+		<properties>
+			<!-- Ingestor -->
+			<ingestor.class />
+			<ingestor.uri.protocol />
+			<ingestor.uri.host />
+			<ingestor.uri.port />
+			<ingestor.uri.user />
+			<ingestor.uri.password />
+			<ingestor.uri.path />
+
+			<!-- Ingestor : CURL specific -->
+			<ingestor.CURLOPT_CONNECTTIMEOUT />
+			<ingestor.CURLOPT_SSL_VERIFYHOST />
+			<ingestor.CURLOPT_SSL_VERIFYPEER />
+			<ingestor.CURLOPT_VERBOSE />
+
+			<!-- Ingestor : SFTP specific -->
+			<ingestor.key.public.path />
+			<ingestor.key.public.fingerprint />
+			<ingestor.key.private.path />
+			<ingestor.key.private.password />
+
+			<!-- Implementation of Common_Decryptor -->
+			<decryptor.class>Paymentech_Decryptor_Gpg</decryptor.class>
+			<decryptor.uri.protocol />
+			<decryptor.uri.host />
+			<decryptor.uri.port />
+			<decryptor.uri.user />
+			<decryptor.uri.password />
+			<decryptor.uri.path>/usr/bin/gpg</decryptor.uri.path>
+			<decryptor.tempdir>/tmp</decryptor.tempdir>
+
+			<!-- Implementation of Common_Validator -->
+			<validator.class>Paymentech_Validator_Xsd</validator.class>
+			<validator.uri.protocol>file</validator.uri.protocol>
+			<validator.uri.host />
+			<validator.uri.port />
+			<validator.uri.user />
+			<validator.uri.password />
+			<validator.uri.path>
+				Paymentech/Profile/Schema.xsd
+			</validator.uri.path>
+
+			<!-- Publisher Uri -->
+			<publisher.uri.protocol />
+			<publisher.uri.host />
+			<publisher.uri.port />
+			<publisher.uri.user />
+			<publisher.uri.password />
+			<publisher.uri.path />
+			<publisher.debug />
+
+			<!-- Logging output Uri -->
+			<logging.uri.protocol />
+			<logging.uri.host />
+			<logging.uri.port />
+			<logging.uri.user />
+			<logging.uri.password />
+			<logging.uri.path />
+			<logging.alerts.enabled />
+			<logging.alerts.recipient />
+			<logging.rotated />
+		</properties>
+	</profile>
+
+	<!-- Shared development profile; "inherits" from local -->
+	<profile>
+		<id>dev</id>
+		<activation>
+			<property>
+				<name>env</name>
+				<value>dev</value>
+			</property>
+		</activation>
+
+		<properties>
+			<!-- DEVEL Ingestor -->
+			<ingestor.class>Paymentech_Ingestor_Stream</ingestor.class>
+			<ingestor.uri.protocol>file</ingestor.uri.protocol>
+			<ingestor.uri.path>
+				Paymentech/Samples/ReferenceMultilineReport.csv
+			</ingestor.uri.path>
+
+			<!-- DEVEL Decryptor -->
+			<decryptor.class>
+				Paymentech_Decryptor_Passthrough
+			</decryptor.class>
+
+			<!-- DEVEL Logging -->
+			<logging.uri.protocol>php</logging.uri.protocol>
+			<logging.uri.host>stdout</logging.uri.host>
+		</properties>
+	</profile>
+
+	<!-- Stage settings are managed by the release deployer -->
+	<profile>
+		<id>stage</id>
+		<activation>
+			<property>
+				<name>env</name>
+				<value>stage</value>
+			</property>
+		</activation>
+
+		<properties>
+			<!-- TEST Ingestor : Paymentech Test Server [use -D at command line to set these] -->
+			<ingestor.class>Paymentech_Ingestor_Sftp</ingestor.class>
+			<ingestor.uri.protocol>sftp</ingestor.uri.protocol>
+			<ingestor.uri.user>[missing]</ingestor.uri.user>
+			<ingestor.uri.password>[missing]</ingestor.uri.password>
+			<ingestor.uri.path>[missing]</ingestor.uri.path>
+			<ingestor.uri.host>
+				netconnectbatchvar1.chasepaymentech.net
+			</ingestor.uri.host>
+
+			<!-- LIVE Paymentech SFTP settings -->
+			<ingestor.key.public.path>
+				[missing]
+			</ingestor.key.public.path>
+			<ingestor.key.public.fingerprint>
+				[missing]
+			</ingestor.key.public.fingerprint>
+			<ingestor.key.private.path>
+				[missing]
+			</ingestor.key.private.path>
+			<ingestor.key.private.password>
+				[missing]
+			</ingestor.key.private.password>
+
+			<!-- TEST Decryptor -->
+			<decryptor.class>Paymentech_Decryptor_Gpg</decryptor.class>
+			<decryptor.uri.password>[missing]</decryptor.uri.password>
+
+			<!-- TEST Controller to process incoming voids -->
+			<publisher.uri.host>[missing]</publisher.uri.host>
+
+			<!-- TEST Logging -->
+			<logging.uri.protocol>php</logging.uri.protocol>
+			<logging.uri.host>stdout</logging.uri.host>
+		</properties>
+	</profile>
+
+	<!-- Production settings are managed by the release deployer -->
+	<profile>
+		<id>prod</id>
+		<activation>
+			<property>
+				<name>env</name>
+				<value>prod</value>
+			</property>
+		</activation>
+
+		<properties>
+			<decryptor.passphrase />
+
+			<!-- LIVE Paymentech server -->
+			<ingestor.class>Paymentech_Ingestor_Sftp</ingestor.class>
+			<ingestor.uri.protocol>sftp</ingestor.uri.protocol>
+			<ingestor.uri.user>[missing]</ingestor.uri.user>
+			<ingestor.uri.password>[missing]</ingestor.uri.password>
+			<ingestor.uri.path>[missing]</ingestor.uri.path>
+			<ingestor.uri.host>
+				netconnectbatch1.chasepaymentech.net
+			</ingestor.uri.host>
+
+			<!-- LIVE Paymentech SFTP settings -->
+			<ingestor.key.public.path>
+				[missing]
+			</ingestor.key.public.path>
+			<ingestor.key.public.fingerprint>
+				[missing]
+			</ingestor.key.public.fingerprint>
+			<ingestor.key.private.path>
+				[missing]
+			</ingestor.key.private.path>
+			<ingestor.key.private.password>
+				[missing]
+			</ingestor.key.private.password>
+
+			<!-- LIVE Decryptor -->
+			<decryptor.class>Paymentech_Decryptor_Gpg</decryptor.class>
+			<decryptor.uri.password>[missing]</decryptor.uri.password>
+
+			<!-- LIVE Controller to process incoming voids -->
+			<publisher.uri.protocol>https</publisher.uri.protocol>
+			<publisher.uri.host>[missing]</publisher.uri.host>
+			<publisher.debug>false</publisher.debug>
+
+			<!-- LIVE Logging -->
+			<logging.uri.protocol>file</logging.uri.protocol>
+			<logging.uri.path>[missing]</logging.uri.path>
+			<logging.alerts.enabled>true</logging.alerts.enabled>
+			<logging.rotated>true</logging.rotated>
+		</properties>
+	</profile>
+</profiles>

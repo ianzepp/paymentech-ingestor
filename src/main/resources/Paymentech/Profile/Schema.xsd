@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://chasepaymentech.net/netconnect"
+	xmlns:tns="http://chasepaymentech.net/netconnect" elementFormDefault="qualified">
+
+	<complexType name="reportHeaderType">
+		<sequence>
+			<element name="presenterId" type="string"></element>
+			<element name="frequency" type="string"></element>
+			<element name="companyNumber" type="string"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="chargebackHeaderType">
+		<sequence>
+			<element name="recordType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="HPDE0017" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="companyId" type="string"></element>
+			<element name="reportDateFrom" type="tns:dateType"></element>
+			<element name="reportDateTo" type="tns:dateType"></element>
+			<element name="generatedDate" type="tns:dateType"></element>
+			<element name="generatedTime" type="time"></element>
+			<element name="summary" type="tns:chargebackSummaryType" maxOccurs="1" minOccurs="0"></element>
+			<element name="record" type="tns:chargebackRecordType" maxOccurs="unbounded" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="chargebackSummaryType">
+		<sequence>
+			<element name="recordType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="RPDE0017S" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entityType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="TD" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entityNumber" type="int"></element>
+			<element name="currency" type="tns:currencyType"></element>
+			<element name="paymentType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="CC" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="category">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="BEGINV" />
+						<enumeration value="RECD" />
+						<enumeration value="REPR" />
+						<enumeration value="PARREP" />
+						<enumeration value="ADJPDE" />
+						<enumeration value="RTM" />
+						<enumeration value="PARRTM" />
+						<enumeration value="RECRS" />
+						<enumeration value="ADJPAR" />
+						<enumeration value="ENDINV" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="financialImpact">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="FIN" />
+						<enumeration value="NON" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="recordCount" type="int"></element>
+			<element name="amount" type="double"></element>
+			<element name="crossCurrency" type="tns:currencyType" maxOccurs="1" minOccurs="0"></element>
+			<element name="crossCurrencyAmount" type="double" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="chargebackRecordType">
+		<sequence>
+			<element name="recordType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="RPDE0017D" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entityType">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="TD" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="entityNumber" type="int"></element>
+			<element name="issuerAmount" type="double"></element>
+			<element name="previousPartial">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="Y" />
+						<enumeration value="N" />
+						<enumeration value="" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="currency" type="tns:currencyType"></element>
+			<element name="category">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="RECD" />
+						<enumeration value="REPR" />
+						<enumeration value="PARREP" />
+						<enumeration value="ADJPDE" />
+						<enumeration value="RTM" />
+						<enumeration value="PARRTM" />
+						<enumeration value="RECRS" />
+						<enumeration value="ENDINV" />
+						<enumeration value="FEEREC" />
+						<enumeration value="FEEREC" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="statusFlag">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="R" />
+						<enumeration value="" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="sequenceNumber" type="int"></element>
+			<element name="merchantOrderNumber" type="string"></element>
+			<element name="cardAccountNumber" type="string"></element>
+			<element name="reasonCode" type="string"></element>
+			<element name="transactionDate" type="tns:dateType"></element>
+			<element name="chargebackDate" type="tns:dateType"></element>
+			<element name="activityDate" type="string"></element>
+			<element name="actionAmount" type="double"></element>
+			<element name="feeAmount" type="double"></element>
+			<element name="usageCode" type="int"></element>
+			<element name="crossCurrency" type="tns:currencyType" maxOccurs="1" minOccurs="0"></element>
+			<element name="crossCurrencyIssuerAmount" type="double" maxOccurs="1" minOccurs="0"></element>
+			<element name="crossCurrencyActionAmount" type="double" maxOccurs="1" minOccurs="0"></element>
+		</sequence>
+	</complexType>
+
+	<complexType name="logInfoType">
+		<sequence>
+			<element name="processedFrom" type="tns:dateType" />
+			<element name="processedTo" type="tns:dateType" />
+			<element name="voidsAttempted" type="int" />
+			<element name="voidsSum" type="float" />
+		</sequence>
+	</complexType>
+
+	<complexType name="voidLogType">
+		<sequence>
+			<element name="outcome" type="tns:outcomeType" maxOccurs="1" minOccurs="1" />
+			<element name="orderVoidId" type="int" />
+			<element name="orderTransactionId" type="int" />
+		</sequence>
+	</complexType>
+
+	<complexType name="outcomeType">
+		<sequence>
+			<element name="result" minOccurs="1" maxOccurs="1">
+				<simpleType>
+					<restriction base="string">
+						<enumeration value="SUCCESS" />
+						<enumeration value="ERROR" />
+					</restriction>
+				</simpleType>
+			</element>
+			<element name="reason" type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<simpleType name="currencyType">
+		<restriction base="string">
+			<enumeration value="USD" />
+			<enumeration value="AUD" />
+			<enumeration value="CAD" />
+			<enumeration value="CHF" />
+			<enumeration value="DKK" />
+			<enumeration value="EUR" />
+			<enumeration value="GBP" />
+			<enumeration value="HKD" />
+			<enumeration value="JPY" />
+			<enumeration value="NOK" />
+			<enumeration value="NZD" />
+			<enumeration value="SEK" />
+			<enumeration value="SGD" />
+			<enumeration value="ZAR" />
+		</restriction>
+	</simpleType>
+
+	<simpleType name="dateType">
+		<restriction base="string">
+			<pattern value='[0-9]{2}/[0-9]{2}/[0-9]{4}' />
+		</restriction>
+	</simpleType>
+
+	<element name="chargebackReport" type="tns:chargebackHeaderType"></element>
+
+</schema>
