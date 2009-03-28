@@ -1,8 +1,77 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.ianzepp.paymentech</groupId>
-  <artifactId>paymentech-ingestor</artifactId>
-  <packaging>php</packaging>
-  <name>Paymentech Ingestor</name>
-  <version>1.0.0-SNAPSHOT</version>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ianzepp.paymentech</groupId>
+	<artifactId>paymentech-ingestor</artifactId>
+	<packaging>php</packaging>
+	<name>Paymentech Ingestor</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<description>This project is an implementation of Zend + PHP + Maven to integrate with the Chase Paymentech service, used by many online merchants.</description>
+	<url>http://code.google.com/p/ianzepp/source/browse/#svn/trunk/paymentech-ingestor</url>
+	<inceptionYear>2009</inceptionYear>
+	<developers>
+		<developer>
+			<id>ian.zepp@gmail.com</id>
+			<name>Ian Zepp</name>
+			<email>ian.zepp@gmail.com</email>
+			<url>http://www.ianzepp.com/engineering</url>
+			<organization>ianzepp.com</organization>
+			<organizationUrl>http://www.ianzepp.com/engineering</organizationUrl>
+			<timezone>MST</timezone>
+			<roles>
+				<role>Software Architect</role>
+				<role>Software Engineer</role>
+				<role>Project Manager</role>
+			</roles>
+		</developer>
+	</developers>
+	<scm>
+		<url>http://code.google.com/p/ianzepp/source/browse/#svn/trunk/paymentech-ingestor</url>
+	</scm>
+	<organization>
+		<name>ianzepp.com</name>
+		<url>http://www.ianzepp.com/engineering</url>
+	</organization>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<plugins>
+			<plugin>
+				<groupId>org.phpmaven</groupId>
+				<artifactId>maven-php-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>bundle-project-sources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<configuration>
+							<appendAssemblyId>false</appendAssemblyId>
+							<descriptors>
+								<descriptor>src/main/assembly/php-lib-with-dependencies.xml</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>com.zend</groupId>
+			<artifactId>zend-framework</artifactId>
+			<version>1.7.7-minimal</version>
+			<classifier>php-lib</classifier>
+		</dependency>
+	</dependencies>
 </project>
